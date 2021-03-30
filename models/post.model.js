@@ -30,6 +30,8 @@ const PostSchema = new Schema({
   post_type: {
     type: Boolean,
   },
+  is_deleted: { type: Boolean },
+
 });
 PostSchema.method("toJSON", function () {
   const { __v, _id, ...object } = this.toObject();

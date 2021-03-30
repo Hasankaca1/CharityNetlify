@@ -20,6 +20,7 @@ exports.create = (req, res) => {
     donation: req.body.donation || null,
     phone: req.body.phone || null,
     is_active: req.body.is_active,
+    is_deleted: req.body.is_deleted
   });
   // Save Customer in the database
   user.save((err, user) => {
