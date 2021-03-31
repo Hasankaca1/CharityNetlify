@@ -20,7 +20,7 @@ exports.create = (req, res) => {
     donation: req.body.donation || null,
     phone: req.body.phone || null,
     is_active: req.body.is_active,
-    is_deleted: req.body.is_deleted
+    is_deleted: req.body.is_deleted || false,
   });
   // Save Customer in the database
   user.save((err, user) => {
@@ -42,7 +42,7 @@ exports.create = (req, res) => {
           return;
         }
 
-        res.send({ message: "User was registered successfully!" });
+        res.send({ message: `User was registered successfully!` });
       });
     });
   });
@@ -54,7 +54,7 @@ exports.findAll = (req, res) => {
     ? { name: { $regex: new RegExp(storeLocation), $options: "i" } }
     : {};
 
-  User.find(condition)
+    User.find(condition)
     .then((data) => {
       res.send(data);
     })
@@ -148,7 +148,7 @@ exports.deleteAll = (req, res) => {
     });
 };
 exports.allAccess = (req, res) => {
-  res.status(200).send("Public Content.");
+  res.render("index");
 };
 
 exports.userBoard = (req, res) => {
