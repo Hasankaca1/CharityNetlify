@@ -2,10 +2,10 @@ const Post = require("../models/post.model");
 
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.title) {
-    res.status(400).send({ message: "Content can not be empty!" });
-    return;
-  }
+  // if (!req.body.title) {
+  //   res.status(400).send({ message: "Content can not be empty!" });
+  //   return;
+  // }
   // Create a Collection
   const post = new Post({
     post_img_id: req.body.post_img_id,
@@ -15,7 +15,6 @@ exports.create = (req, res) => {
     title: req.body.title,
     summary: req.body.summary,
     content: req.body.content,
-    media: req.body.media,
     user_id: req.body.user_id || null,
     post_type: req.body.post_type,
     is_deleted: req.body.is_deleted || false,
