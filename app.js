@@ -3,15 +3,16 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var bd = require("./models");
-var Role = bd.role;
 const cors = require("cors");
-
 
 var indexRouter = require("./routes/auth.routes");
 var usersRouter = require("./routes/user.routes");
 var addressesRouter = require("./routes/address.routes");
 var donationsRouter = require("./routes/donation.routes");
+var donateGoodsRouter = require("./routes/donate-good.routes");
+var donateGiftcardsRouter = require("./routes/donate-giftcard.routes");
+var donateTimesRouter = require("./routes/donate-time.routes");
+var donateAmbassadorsRouter = require("./routes/donate-ambassador.routes");
 var mediasRouter = require("./routes/media.routes");
 var postsRouter = require("./routes/post.routes");
 var involvementsRouter = require("./routes/involvement.routes");
@@ -24,13 +25,13 @@ const db = require("./helpers/db")();
 const { verifyToken } = require("./middlewares");
 const config = require("./config");
 app.set("api_secret_key", config.api_secret_key);
+
+// cors
 let corsOptions = {
   origin: process.env.ORIGIN || "http://localhost:3000", //This is for frontend
   // credentials: true,
   // optionsSuccessStatus: 200, // For legacy browser support
 };
-
-
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -43,12 +44,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors(corsOptions));
-
 app.use("/", indexRouter);
 app.use("/api", verifyToken.verifyToken);
 app.use("/users", usersRouter);
 app.use("/addresses", addressesRouter);
 app.use("/donations", donationsRouter);
+app.use("/goods-donation", donateGoodsRouter);
+app.use("/gift-card-donation", donateGiftcardsRouter);
+app.use("/time-donation", donateTimesRouter);
+app.use("/ambassadors", donateAmbassadorsRouter);
 app.use("/medias", mediasRouter);
 app.use("/posts", postsRouter);
 app.use("/involvements", involvementsRouter);
@@ -58,7 +62,6 @@ app.use("/involvements-req", involvementsReqRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
-
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", true);
@@ -68,8 +71,6 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
-
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
