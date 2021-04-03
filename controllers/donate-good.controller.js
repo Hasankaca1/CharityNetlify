@@ -41,7 +41,7 @@ exports.findAll = (req, res) => {
     ? { name: { $regex: new RegExp(storeLocation), $options: "i" } }
     : {};
 
-  Good.find(condition)
+    Good.find(condition)
     .then((data) => {
       res.send(data);
     })

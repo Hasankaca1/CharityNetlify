@@ -39,7 +39,7 @@ exports.findAll = (req, res) => {
     ? { name: { $regex: new RegExp(storeLocation), $options: "i" } }
     : {};
 
-  Time.find(condition)
+    Time.find(condition)
     .then((data) => {
       res.send(data);
     })

@@ -35,7 +35,7 @@ exports.findAll = (req, res) => {
     ? { name: { $regex: new RegExp(storeLocation), $options: "i" } }
     : {};
 
-  Giftcard.find(condition)
+    Giftcard.find(condition)
     .then((data) => {
       res.send(data);
     })

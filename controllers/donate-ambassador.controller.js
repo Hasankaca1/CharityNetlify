@@ -41,7 +41,7 @@ exports.findAll = (req, res) => {
     ? { name: { $regex: new RegExp(storeLocation), $options: "i" } }
     : {};
 
-  Ambassador.find(condition)
+    Ambassador.find(condition)
     .then((data) => {
       res.send(data);
     })
