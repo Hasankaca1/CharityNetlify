@@ -11,7 +11,7 @@ exports.create = (req, res) => {
   const media = new Media({
     media_url: req.body.media_url || null,
     title: req.body.title || null,
-    is_deleted: req.body.is_deleted || null,
+    is_deleted: req.body.is_deleted || false,
     media_type: req.body.media_type || null,
     created_at: req.body.created_at,
   });
@@ -20,11 +20,34 @@ exports.create = (req, res) => {
     .save(media)
     .then((data) => {
       res.send(data);
+      const id = req.body.id;
+      Post.findByIdAndUpdate(
+        id,
+        {
+          $set: {
+            post_img_url: data.media_post_id,
+            post_donate_url: data.media_donate_id,
+          },
+        },
+        { useFindAndModify: false, new: true }
+      )
+        .then((data) => {
+          res.send(data);
+          if (!data) {
+            res.status(404).send({
+              message: `Cannot update Media with id=${id}. Media was not found!`,
+            });
+          } else res.send({ message: " Media was updated successfully." });
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message: "Error updating Media with id=" + id,
+          });
+        });
     })
     .catch((err) => {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Address.",
+        message: err.message || "Some error occurred while creating the Media.",
       });
     });
 };
@@ -35,7 +58,7 @@ exports.findAll = (req, res) => {
     ? { name: { $regex: new RegExp(storeLocation), $options: "i" } }
     : {};
 
-  Media.find(condition)
+    Media.find(condition)
     .then((data) => {
       res.send(data);
     })
