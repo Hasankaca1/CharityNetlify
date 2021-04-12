@@ -6,8 +6,63 @@ html
   body
     block content
 
+      p Pug rocks!
+    div  router.get("/:id", users.findOne); // Retrieve a single User with id
+    div  router.put("/:id", users.update); // Update a User with id
+    div  router.delete("/:id", users.delete); // Delete a User with id )
+      ul 
+    div router.get("/:id", subscribers.findOne); // Retrieve a single Collection with id
+    div router.put("/:id", subscribers.update); // Update a Collection with id
+    div router.delete("/:id", subscribers.delete); // Delete a Collection with id
+      ul 
+    div router.get("/:id", posts.findOne); // Retrieve a single Collection with id
+    div router.put("/:id", posts.update); // Update a Collection with id
+    div router.delete("/:id", posts.delete); // Delete a Collection with id
+      ul 
+    div router.get("/:id", paypal.findOne); // Retrieve a single Collection with id
+    div router.put("/:id", paypal.update); // Update a Collection with id
+    div router.delete("/:id", paypal.delete); // Delete a Collection with id
+      ul 
+    div router.get("/:id", medias.findOne); // Retrieve a single Collection with id
+    div router.put("/:id", medias.update); // Update a Collection with id
+    div router.delete("/:id", medias.delete); // Delete a Collection with id  
+      ul 
+    div router.get("/:id", involvements.findOne); // Retrieve a single involvement with id
+    div router.put("/:id", involvements.update); // Update a involvement with id
+    div router.delete("/:id", involvements.delete); // Delete a involvement with id    
+      ul 
+    div router.get("/:id", involvementsReq.findOne); // Retrieve a single involvementsReq with id
+    div router.put("/:id", involvementsReq.update); // Update a involvementsReq with id
+    div router.delete("/:id", involvementsReq.delete); // Delete a involvementsReq with id  
+      ul 
+    div router.get("/:id", donations.findOne); // Retrieve a single donations with id
+    div router.put("/:id", donations.update); // Update a donations with id
+    div router.delete("/:id", donations.delete); // Delete a donations with id  
+      ul 
+    div router.get("/:id", times.findOne); // Retrieve a single donate-time with id
+    div router.put("/:id", times.update); // Update a donate-time with id
+    div router.delete("/:id", times.delete); // Delete a donate-time with id \
+      ul 
+    div router.get("/:id", goods.findOne); // Retrieve a single donate-good with id
+    div router.put("/:id", goods.update); // Update a donate-good with id
+    div router.delete("/:id", goods.delete); // Delete a donate-good with id     
+      ul 
+    div router.get("/:id", giftcards.findOne); // Retrieve a single donate-giftcard with id
+    div router.put("/:id", giftcards.update); // Update a donate-giftcard with id
+    div router.delete("/:id", giftcards.delete); // Delete a donate-giftcard with id  
+      ul 
+    div router.get("/:id", ambassadors.findOne); // Retrieve a single donate-ambassador with id
+    div router.put("/:id", ambassadors.update); // Update a donate-ambassador with id
+    div router.delete("/:id", ambassadors.delete); // Delete a donate-ambassador with id  
+      ul 
+    div router.get("/:id", contactus.findOne); // Retrieve a single contactus with id
+    div router.put("/:id", contactus.update); // Update a contactus with id
+    div router.delete("/:id", contactus.delete); // Delete a contactus with id   
+      ul 
+    div router.get("/:id", addresses.findOne); // Retrieve a single addresses with id
+    div router.put("/:id", addresses.update); // Update a addresses with id
+    div router.delete("/:id", addresses.delete); // Delete a addresses with id               
 
-
-    block foot
+    block foot 
       #footer
         p This line for footer content

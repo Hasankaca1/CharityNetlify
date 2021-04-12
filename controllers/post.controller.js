@@ -2,19 +2,21 @@ const Post = require("../models/post.model");
 
 exports.create = (req, res) => {
   // Validate request
-  // if (!req.body.title) {
-  //   res.status(400).send({ message: "Content can not be empty!" });
-  //   return;
-  // }
+  if (!req.body.title) {
+    res.status(400).send({ message: "Content can not be empty!" });
+    return;
+  }
   // Create a Collection
   const post = new Post({
-    post_img_id: req.body.post_img_id,
-    donatee_img_id: req.body.donatee_img_id,
+    post_img_url: req.body.post_img_url,
+    donatee_img_url: req.body.donatee_img_url,
     donatee_desc: req.body.donatee_desc,
     donatee_name: req.body.donatee_name,
     title: req.body.title,
     summary: req.body.summary,
     content: req.body.content,
+    created_at: req.body.created_at,
+    updated_at: req.body.updated_at,
     user_id: req.body.user_id || null,
     post_type: req.body.post_type,
     is_deleted: req.body.is_deleted || false,
@@ -52,14 +54,14 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
   const id = req.params.id;
-  
+
   Post.aggregate([
     {
       $lookup: {
         from: "media",
-        localField: "media_id",
-        foreignField: "media",
-        as: "medias",
+        localField: "_id",
+        foreignField: "post_donatee_img_id",
+        as: "post_img_id",
       },
     },
   ])

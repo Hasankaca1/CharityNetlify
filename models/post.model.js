@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-  post_img_id: {
+  post_img_url: {
     type: String,
   },
-  donatee_img_id: {
+  donatee_img_url: {
     type: String,
   },
   donatee_desc: {
@@ -30,7 +30,6 @@ const PostSchema = new Schema({
     type: Boolean,
   },
   is_deleted: { type: Boolean },
-
 });
 PostSchema.method("toJSON", function () {
   const { __v, _id, ...object } = this.toObject();
