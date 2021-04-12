@@ -2,7 +2,7 @@ const users = require("../controllers/user.controller");
 let router = require("express").Router();
 const { verifyToken } = require("../middlewares");
 
-// router.post("/", users.create); // Create a new User
+router.post("/", users.create); // Create a new User
 router.get("/", users.findAll); // Retrieve all Users
 router.get("/:id", users.findOne); // Retrieve a single User with id
 router.put("/:id", users.update); // Update a User with id
