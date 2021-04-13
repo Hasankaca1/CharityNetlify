@@ -31,7 +31,7 @@ exports.create = (req, res) => {
       return;
     }
 
-        Role.findOne({ name: "user" }, (err, role) => {
+    Role.findOne({ name: "user" }, (err, role) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
@@ -43,7 +43,7 @@ exports.create = (req, res) => {
           res.status(500).send({ message: err });
           return;
         }
-        
+
         res.send({ message: `User was registered successfully!` });
       });
     });
@@ -55,25 +55,10 @@ exports.findAll = (req, res) => {
   let condition = name
     ? { name: { $regex: new RegExp(storeLocation), $options: "i" } }
     : {};
-  User.find(condition)
+  User.find({ is_deleted: false })
+    .populate("roles")
     .then((data) => {
-      // res.send(data);
-      User.aggregate([
-        {
-          $lookup: {
-            from: "roles",
-            localField: "roles",
-            foreignField: "_id",
-            as: "role",
-          },
-        },
-      ])
-        .then((data) => {
-          res.json(data);
-        })
-        .catch((err) => {
-          res.json(err);
-        });
+      res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
