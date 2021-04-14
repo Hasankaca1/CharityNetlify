@@ -12,6 +12,7 @@ html
       ul 
     div
     a USERS
+    div router.get("/info/:id", users.findOneUser); // Retrieve a single User with id
     div  router.post("/", users.create); // Create a new User
     div  router.get("/:id", users.findOne); // Retrieve a single User with id
     div  router.put("/:id", users.update); // Update a User with id
