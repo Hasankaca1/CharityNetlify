@@ -116,6 +116,7 @@ exports.findOneUser = (req, res) => {
   const id = req.params.id;
 
   User.findById(id)
+  .popuate("roles")
     .then((data) => {
       if (!data)
         res.status(404).send({ message: "Not found User with id " + id });
